@@ -38,18 +38,11 @@
 
 아마 몇 가지 더 있겠지만, 몇 가지 단점이 있습니다
 
-- It may **lack depth** - many, much longer Haskell tutorials are long because they go
-  deeper into the nuts and bolts of each feature.
-- It may **not cover as many features or techniques** as other tutorials -
-  we try to cover features as they pop up in our implementation, but we will
-  probably miss features that aren't as important for our tasks,
-  while other resources may try to cover many different use cases.
-- It is **very new** and not "battle-tested". Who knows if this is a good approach to
-  learning Haskell? Maybe you could help with that!
-- It **doesn't have a technical editor**, making the book not as good as it could've been.
+- 이 책은 **깊이가 얕을 수** 있습니다 - 많은, 훨씬 긴 하스켈 튜토리얼들은 하스켈의 세부적인 기능들까지 깊게 들어가기에 긴 길이를 가지게 된 것입니다.
+- 이 책은 다른 튜토리얼들처럼 **많은 기능이나 기술들을 다루지 않을 수** 있습니다. - 우리는 구현하는 과정에서 나타나는 기능들을 다루려고 노력하지만, 우리가 하는 작업에 중요하지 않은 기능을 놓칠 수도 있습니다.
+- 이 책은 **굉장히 새롭습니다** 그리고 검증되지 않았습니다. 이 방법이 하스켈을 배우는 좋은 방법인지 누가 알겠습니까? 어쩌면 당신이 도움이 될 수 있습니다!
+- 이 책은 **기술 편집자가 없습니다**, 따라서 책이 기대만큼 좋지는 않습니다.
 
-### Other learning resources
+### 다른 튜토리얼들
 
-The [haskell.org/documentation](https://www.haskell.org/documentation/) page lists
-many tutorials, books, guides and courses. You can find a few alternatives that I can
-recommend [in this list](https://github.com/soupi/haskell-study-plan#about-this-guide).
+[haskell.org/documentation](https://www.haskell.org/documentation/)에서는 많은 튜토리얼, 책, 가이드와 강의들의 목록을 볼 수 있습니다. [이 목록](https://github.com/soupi/haskell-study-plan#about-this-guide)에서 내가 추천하는 몇 가지 대안을 찾을 수 있습니다.
