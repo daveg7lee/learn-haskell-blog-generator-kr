@@ -1,4 +1,4 @@
-# About this book
+# 이 책에 대하여
 
 > Note: This book is still fairly new. If you find errors, [please let me know](https://github.com/soupi/learn-haskell-blog-generator/issues).
 

@@ -1,4 +1,4 @@
-# Building an HTML printer library
+# HTML 출력 라이브러리 만들기
 
 In this part we'll explore a few basic building blocks in Haskell,
 including functions, types and modules, while building a small HTML printer library

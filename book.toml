@@ -1,14 +1,14 @@
 [book]
-title = "Learn Haskell by building a blog generator"
-description = "A project-oriented online book about Haskell"
+title = "블로그 생성기를 만들며 배우는 하스켈"
+description = "프로젝트 중심의 온라인 하스켈 책"
 authors = ["Gil Mizrahi"]
-language = "en"
+language = "kr"
 multilingual = false
 src = "src"
-git-repository-url = "https://github.com/soupi/learn-haskell-blog-generator"
+git-repository-url = "https://github.com/daveg7lee/learn-haskell-blog-generator-kr"
 git-repository-icon = "fa-github"
 
 [output.html]
-git-repository-url = "https://github.com/soupi/learn-haskell-blog-generator"
+git-repository-url = "https://github.com/daveg7lee/learn-haskell-blog-generator-kr"
 git-repository-icon = "fa-github"
 
