@@ -186,78 +186,68 @@
 <h3 id="다른-튜토리얼들"><a class="header" href="#다른-튜토리얼들">다른 튜토리얼들</a></h3>
 <p><a href="https://www.haskell.org/documentation/">haskell.org/documentation</a>에서는 많은 튜토리얼, 책, 가이드와 강의들의 목록을 볼 수 있습니다. <a href="https://github.com/soupi/haskell-study-plan#about-this-guide">이 목록</a>에서 내가 추천하는 몇 가지 대안을 찾을 수 있습니다.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello, world!</a></h1>
-<p>In this chapter we will create a simple HTML &quot;hello world&quot; program and use the Haskell toolchain
-to compile and run it.</p>
+<p>이 장에서는 간단한 HTML &quot;hello world&quot; 프로그램을 만들고 하스켈 툴체인을 사용해 프로그램을 컴파일하고 실행시켜 볼 것입니다.</p>
 <blockquote>
-<p>If you haven't installed a Haskell toolchain yet, visit
-<a href="https://haskell.org/downloads">haskell.org/downloads</a> for instructions on how to download
-and install a Haskell toolchain.</p>
+<p>만약 하스켈 툴체인을 설치하지 않았다면, <a href="https://haskell.org/downloads">haskell.org/downloads</a>을 방문하여 하스켈 툴체인을 다운로드 받으세요</p>
 </blockquote>
-<h2 id="a-haskell-source-file"><a class="header" href="#a-haskell-source-file">A Haskell source file</a></h2>
-<p>A Haskell source file is composed of definitions.</p>
-<p>The most common type of definitions have the following form:</p>
+<h2 id="하스켈-소스-파일"><a class="header" href="#하스켈-소스-파일">하스켈 소스 파일</a></h2>
+<p>하스켈 소스 파일은 정의들로 구성됩니다.</p>
+<p>가장 일반적인 정의 유형은 다음과 같은 형식을 가지고 있습니다:</p>
 <pre><code class="language-hs">&lt;name&gt; = &lt;expression&gt;
 </code></pre>
-<p>Note that:</p>
+<p>🚨 주의:</p>
 <ol>
-<li>We cannot write expressions without binding them to a name</li>
-<li>Names must start with a lowercase letter</li>
-<li>We cannot use the same name more than once in a file</li>
+<li>expression은 이름에 바인딩하지 않고는 사용할 수 없습니다.</li>
+<li>이름은 무조건 소문자로 시작해야만 합니다.</li>
+<li>하나의 파일 안에서 같은 이름은 사용할 수 없습니다.</li>
 </ol>
-<p>A source file containing a definition of the name <code>main</code> can be treated as an executable,
-and the expression <code>main</code> is bound to is the entry point to the program.</p>
-<p>Let's create a new Haskell source file called <code>hello.hs</code>, and write the following line there:</p>
+<p><code>main</code> 이라는 이름의 정의를 가지고 있는 소스 파일은 실행 파일로 취급됩니다, 그리고 <code>main</code> 은 프로그램의 진입점으로 바인딩 됩니다.</p>
+<p><code>hello.hs</code> 라는 하스켈 소스 파일을 하나 생성하고, 아래 내용을 작성해봅시다:</p>
 <pre><code class="language-hs">main = putStrLn &quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;
 </code></pre>
-<p>We've defined a new name, <code>main</code>, and bound it to the expression <code>putStrLn &quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;</code>.</p>
-<p>the body of <code>main</code> means calling the function <code>putStrLn</code> with the string <code>&quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;</code>
-as input. <code>putStrLn</code> takes a single string as input and prints that string to the standard output.</p>
-<p><strong>Note</strong>: we don't need parenthesis to pass arguments to functions in Haskell.</p>
-<p>Running this program will result in the following text printed on the screen:</p>
+<p>여기서 우리는 <code>main</code> 이라는 새로운 이름을 정의했습니다, 그리고 이것을 <code>putStrLn &quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;</code> 이라는 expression에 바인딩 했습니다.</p>
+<p>여기서 <code>main</code>은 <code>putStrLn</code> 이라는 함수를 <code>&quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;</code> 이라는 문자열을 인수로 호출하고 있습니다. <code>putStrLn</code> 은 문자열 하나를 입력으로 받아 그 문자열을 터미널에 출력해주는 함수입니다.</p>
+<p><strong>주의</strong>: 하스켈에서는 함수에 인수를 전달하기 위한 괄호가 필요하지 않습니다.</p>
+<p>위 프로그램을 실행하면 다음과 같은 문자가 출력되는 것을 확인할 수 있습니다:</p>
 <pre><code>&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;
 </code></pre>
-<h2 id="compiling-programs"><a class="header" href="#compiling-programs">Compiling programs</a></h2>
-<p>To run this little program, we can compile it using the command line program <code>ghc</code>:</p>
+<h2 id="프로그램-컴파일하기"><a class="header" href="#프로그램-컴파일하기">프로그램 컴파일하기</a></h2>
+<p>이 작은 프로그램을 실행하기 위해서는, 우리는 <code>ghc</code> 라는 커멘트 라인 프로그램을 사용해서 컴파일할 수 있습니다:</p>
 <pre><code class="language-sh">&gt; ghc hello.hs
 [1 of 1] Compiling Main             ( hello.hs, hello.o )
 Linking hello ...
 </code></pre>
-<p>Invoking <code>ghc</code> with <code>hello.hs</code> will create the following artifact files:</p>
+<p><code>hello.hs</code> 파일로 <code>ghc</code> 를 호출하면 다음과 같은 아티팩트 파일들이 생성됩니다:</p>
 <ol>
-<li><code>hello.o</code> - Object file</li>
-<li><code>hello.hi</code> - Haskell interface file</li>
-<li><code>hello</code> - A native executable file</li>
+<li><code>hello.o</code> - 오브젝트 파일</li>
+<li><code>hello.hi</code> - 하스켈 인터페이스 파일</li>
+<li><code>hello</code> - 네이티브 실행 파일</li>
 </ol>
-<p>And after the compilation, we can run the <code>hello</code> executable:</p>
+<p>컴파일이 끝난 후에는, 다음과 같이 <code>hello</code> 파일을 실행할 수 있습니다</p>
 <pre><code class="language-sh">&gt; ./hello
 &lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;
 </code></pre>
-<h2 id="interpreting-programs"><a class="header" href="#interpreting-programs">Interpreting programs</a></h2>
-<p>Alternatively, we can skip the compilation and creation of artifact files phase, and run the source file directly
-using the command line program <code>runghc</code>:</p>
+<h2 id="프로그램-인터프리팅하기"><a class="header" href="#프로그램-인터프리팅하기">프로그램 인터프리팅하기</a></h2>
+<p>위와 같이 파일을 컴파일하는 방법도 있지만, 아티팩트 파일의 컴파일 단계를 건너뛰고, 아래와 같이 커맨드 라인 프로그램 <code>runghc</code>을 사용해 소스 파일을 직접 실행할 수도 있습니다.</p>
 <pre><code class="language-sh">&gt; runghc hello.hs
 &lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;
 </code></pre>
-<p>We can also redirect the output of the program to a file and then open it in Firefox.</p>
+<p>또한, 프로그램의 출력을 파일로 만들어 파이어폭스에서 확인해 볼 수도 있습니다.</p>
 <pre><code class="language-sh">&gt; runghc hello.hs &gt; hello.html
 &gt; firefox hello.html
 </code></pre>
-<p>This command should open Firefox and display a web page with <code>Hello, world!</code> written in it.</p>
-<p>I recommend using <code>runghc</code> with this tutorial. While compiling produces significantly faster programs,
-intepreting programs provides us with faster feedback while we are developing and making frequent changes.</p>
+<p>위의 커맨드는 파이어폭스를 열고 <code>Hello, world!</code>라고 적혀있는 웹 페이지를 보여줄 것입니다.</p>
+<p>이 튜토리얼을 진핸하는 동안에는 <code>runghc</code> 를 사용하기를 추천합니다. 컴파일을 할 경우 훨씬 빠른 프로그램이 나오지만, 인터프리터는 잦은 수정이 일어나는 동안에 빠른 피드백을 제공합니다.</p>
 <blockquote>
-<p>If you want to learn more about the core Haskell tools, you can read
-<a href="https://gilmi.me/blog/post/2021/08/14/hs-core-tools">this article</a>,
-but what's described above is enough for our usage at the moment.</p>
+<p>만약 core Haskell tools에 대해 더 알고 싶다면 <a href="https://gilmi.me/blog/post/2021/08/14/hs-core-tools">이 포스트</a>를 읽어볼 수 있습니다, 하지만 위에 적혀있는 내용으로도 앞으로의 과정을 충분히 진행할 수 있습니다.</p>
 </blockquote>
-<h2 id="more-bindings"><a class="header" href="#more-bindings">More bindings</a></h2>
-<p>We can define the HTML string passed to <code>putStrLn</code> in a new name instead of passing
-it directly to <code>putStrLn</code>. Change the content of file <code>hello.hs</code> we defined above to:</p>
+<h2 id="더-많은-바인딩"><a class="header" href="#더-많은-바인딩">더 많은 바인딩</a></h2>
+<p>우리는 <code>putStrLn</code>에 바로 HTML 문자열을 보내는 것이 아닌 새로운 이름으로 전달할 수 있습니다. 아래와 같이 <code>hello.hs</code>의 내용을 바꿔보세요.</p>
 <pre><code class="language-hs">main = putStrLn myhtml
 
 myhtml = &quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&quot;
 </code></pre>
-<p><strong>Note</strong>: the order in which we declare the bindings does not matter.</p>
+<p><strong>주의</strong>: 바인딩을 선언하는 순서는 중요하지 않습니다.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="html-출력-라이브러리-만들기"><a class="header" href="#html-출력-라이브러리-만들기">HTML 출력 라이브러리 만들기</a></h1>
 <p>In this part we'll explore a few basic building blocks in Haskell,
 including functions, types and modules, while building a small HTML printer library
