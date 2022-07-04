@@ -1,4 +1,4 @@
-# Flexible HTML content (functions)
+# 유연한 HTML 콘텐츠 (functions)
 
 We'd like to be able to write different HTML pages without having to write the whole
 structure of HTML and body tags over and over again. We can do that with functions.
