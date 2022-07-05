@@ -252,40 +252,34 @@ myhtml = &quot;&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&q
 <p>이번 장에서 우리는 나중에 우리의 마크업 블로그로부터 HTML 페이지를 생성해낼 작은 HTML 출력 라이브러리를 만들며 함수, 타입, 모듈을 포함한 몇 가지 기본적인 하스켈 빌딩 블록들에 대해 알아볼 것입니다.</p>
 <p>만약 HTML이 익숙하지 않다면 이 장을 시작하기 전에 MDN의 <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started">Getting started with HTML</a>을 보고 오는 것이 이번 장에 대한 좋은 개요가 될 수 있습니다.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="유연한-html-콘텐츠-functions"><a class="header" href="#유연한-html-콘텐츠-functions">유연한 HTML 콘텐츠 (functions)</a></h1>
-<p>We'd like to be able to write different HTML pages without having to write the whole
-structure of HTML and body tags over and over again. We can do that with functions.</p>
-<p>To define a function, we create a definition like we saw previously and add the argument
-names after the name and before the equals sign (<code>=</code>).
-So a function definition has the following form:</p>
+<p>우리는 HTML의 반복되는 부분(Ex: html, body 등)을 반복해서 작성하지 않고도 HTML 페이지를 작성할 수 있기를 원합니다. 우리는 함수를 통해 그런 작업을 할 수 있습니다.</p>
+<p>함수를 만들고 인수를 넣기 위해서는, 저번에 봤던 것처럼 정의를 만들고 이름과 <code>=</code> 표시 사이에 인수의 이름을 적을 수 있습니다.
+따라서 함수는 다음과 같은 모양을 가지게 됩니다.</p>
 <pre><code class="language-hs">&lt;name&gt; &lt;arg1&gt; &lt;arg2&gt; ... &lt;argN&gt; = &lt;expression&gt;
 </code></pre>
-<p>The argument names will be available in scope on the right side of the equals sign
-(in the <code>&lt;expression&gt;</code>), and the function name will be <code>&lt;name&gt;</code>.</p>
-<p>We'll define a function that takes a string, which is the content of the page, and wraps it in
-the relevant <code>html</code> and <code>body</code> tags by concatenating them before and after the content.
-We use the operator <code>&lt;&gt;</code> to concatenate two strings.</p>
+<p>인수는 등호 오른쪽 범위(<code>&lt;expression&gt;</code> 안쪽)에서 사용할 수 있으며 함수의 이름은 <code>&lt;name&gt;</code>이 되게 됩니다.</p>
+<p>우리는 페이지의 콘텐츠가 될 문자열을 받아 그 문자열을 <code>html</code> 과 <code>body</code> 태그로 감싸는 함수를 작성할 것입니다.
+두 개의 문자열을 합치기 위해 연산자 <code>&lt;&gt;</code>을 사용합니다.</p>
 <pre><code class="language-hs">wrapHtml content = &quot;&lt;html&gt;&lt;body&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/body&gt;&lt;/html&gt;&quot;
 </code></pre>
-<p>This function, <code>wrapHtml</code>, takes one argument named <code>content</code> and returns a string
-that prefixes <code>&lt;html&gt;&lt;body&gt;</code> before the content and appends <code>&lt;/body&gt;&lt;/html&gt;</code> after it.
-Note that it is common to use camelCase in Haskell for names.</p>
-<p>Now we can adjust our <code>myhtml</code> definition from the previous chapter:</p>
+<p>함수 <code>wrapHtml</code>은 <code>content</code>라는 인수를 받아 앞에 <code>&lt;html&gt;&lt;body&gt;</code>을 추가하고 뒤에 <code>&lt;/body&gt;&lt;/html&gt;</code>을 추가하여 리턴하는 함수입니다. </p>
+<blockquote>
+<p>하스켈에서는 주로 카멜 표기법을 사용한다는 점을 유의하십시오.</p>
+</blockquote>
+<p>이제 이전 장에서 만들었던 <code>myhtml</code>의 정의를 다음과 같이 수정할 수 있습니다:</p>
 <pre><code class="language-hs">myhtml = wrapHtml &quot;Hello, world!&quot;
 </code></pre>
-<p>Again, notice that we don't need parenthesis when calling functions. Function calls have the form:</p>
+<p>다시 말하지만, 하스켈에서는 함수를 호출할 때 괄호가 필요하지 않습니다. 함수 호출의 형식은 다음과 같습니다.</p>
 <pre><code class="language-hs">&lt;name&gt; &lt;arg1&gt; &lt;arg2&gt; ... &lt;argN&gt;
 </code></pre>
-<p>However, if we wanted to substitute <code>myhtml</code> with the expression <code>myhtml</code> is bound
-to in <code>main = putStrLn myhtml</code>, we would have to wrap the expression in parenthesis:</p>
+<p>그러나, <code>myhtml</code>을 사용하지 않고 <code>main = putStrLn myhtml</code>에 바로 바인딩하고 싶다면 아래와 같이 괄호로 묶어 식을 나타내야만 합니다.</p>
 <pre><code class="language-hs">main = putStrLn (wrapHtml &quot;Hello, world!&quot;)
 </code></pre>
-<p>If we accidentally write this instead:</p>
+<p>만약 실수로 괄호를 사용하지 않는다면,</p>
 <pre><code class="language-hs">main = putStrLn wrapHtml &quot;Hello, world!&quot;
 </code></pre>
-<p>we'll get an error from GHC stating that <code>putStrLn</code> is applied to two arguments,
-but it only takes one. This is because the above is of the form <code>&lt;name&gt; &lt;arg1&gt; &lt;arg2&gt;</code>
-in which, as we defined earlier, <code>&lt;arg1&gt;</code> and <code>&lt;arg2&gt;</code> are arguments to <code>&lt;name&gt;</code>.</p>
-<p>By using parenthesis we can group together the expressions in the right order.</p>
+<p><code>putStrLn</code>이 두 개의 인수에 적용되지만 하나만 사용한다는 GHC의 오류가 발생합니다. 이는 위의 형식이 <code>&lt;name&gt; &lt;arg1&gt; &lt;arg2&gt;</code> 형식이기 때문입니다. 여기서 앞서 정의한 바와 같이 <code>&lt;arg1&gt;</code> 및 <code>&lt;arg2&gt;</code>는 <code>&lt;name&gt;</code>에 대한 인수입니다.</p>
+<p>괄호를 사용하여 올바른 순서로 표현식을 묶을 수 있습니다.</p>
 <blockquote>
 <h4 id="an-aside-about-operator-precedence-and-fixity"><a class="header" href="#an-aside-about-operator-precedence-and-fixity">An aside about operator precedence and fixity</a></h4>
 <p>operators (like <code>&lt;&gt;</code>) are infix functions which take two arguments - one from each side.</p>
