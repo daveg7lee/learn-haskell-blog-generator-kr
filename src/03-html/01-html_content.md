@@ -1,62 +1,54 @@
 # 유연한 HTML 콘텐츠 (functions)
 
-We'd like to be able to write different HTML pages without having to write the whole
-structure of HTML and body tags over and over again. We can do that with functions.
+우리는 HTML의 반복되는 부분(Ex: html, body 등)을 반복해서 작성하지 않고도 HTML 페이지를 작성할 수 있기를 원합니다. 우리는 함수를 통해 그런 작업을 할 수 있습니다.
 
-To define a function, we create a definition like we saw previously and add the argument
-names after the name and before the equals sign (`=`).
-So a function definition has the following form:
+함수를 만들고 인수를 넣기 위해서는, 저번에 봤던 것처럼 정의를 만들고 이름과 `=` 표시 사이에 인수의 이름을 적을 수 있습니다.
+따라서 함수는 다음과 같은 모양을 가지게 됩니다.
 
 ```hs
 <name> <arg1> <arg2> ... <argN> = <expression>
 ```
 
-The argument names will be available in scope on the right side of the equals sign
-(in the `<expression>`), and the function name will be `<name>`.
+인수는 등호 오른쪽 범위(`<expression>` 안쪽)에서 사용할 수 있으며 함수의 이름은 `<name>`이 되게 됩니다.
 
-We'll define a function that takes a string, which is the content of the page, and wraps it in
-the relevant `html` and `body` tags by concatenating them before and after the content.
-We use the operator `<>` to concatenate two strings.
+우리는 페이지의 콘텐츠가 될 문자열을 받아 그 문자열을 `html` 과 `body` 태그로 감싸는 함수를 작성할 것입니다.
+두 개의 문자열을 합치기 위해 연산자 `<>`을 사용합니다.
 
 ```hs
 wrapHtml content = "<html><body>" <> content <> "</body></html>"
 ```
 
-This function, `wrapHtml`, takes one argument named `content` and returns a string
-that prefixes `<html><body>` before the content and appends `</body></html>` after it.
-Note that it is common to use camelCase in Haskell for names.
+함수 `wrapHtml`은 `content`라는 인수를 받아 앞에 `<html><body>`을 추가하고 뒤에 `</body></html>`을 추가하여 리턴하는 함수입니다. 
+> 하스켈에서는 주로 카멜 표기법을 사용한다는 점을 유의하십시오.
 
-Now we can adjust our `myhtml` definition from the previous chapter:
+
+이제 이전 장에서 만들었던 `myhtml`의 정의를 다음과 같이 수정할 수 있습니다:
 
 ```hs
 myhtml = wrapHtml "Hello, world!"
 ```
 
-Again, notice that we don't need parenthesis when calling functions. Function calls have the form:
+다시 말하지만, 하스켈에서는 함수를 호출할 때 괄호가 필요하지 않습니다. 함수 호출의 형식은 다음과 같습니다.
 
 ```hs
 <name> <arg1> <arg2> ... <argN>
 ```
 
-However, if we wanted to substitute `myhtml` with the expression `myhtml` is bound
-to in `main = putStrLn myhtml`, we would have to wrap the expression in parenthesis:
+그러나, `myhtml`을 사용하지 않고 `main = putStrLn myhtml`에 바로 바인딩하고 싶다면 아래와 같이 괄호로 묶어 식을 나타내야만 합니다.
 
 ```hs
 main = putStrLn (wrapHtml "Hello, world!")
 ```
 
-If we accidentally write this instead:
+만약 실수로 괄호를 사용하지 않는다면,
 
 ```hs
 main = putStrLn wrapHtml "Hello, world!"
 ```
 
+`putStrLn`이 두 개의 인수에 적용되지만 하나만 사용한다는 GHC의 오류가 발생합니다. 이는 위의 형식이 `<name> <arg1> <arg2>` 형식이기 때문입니다. 여기서 앞서 정의한 바와 같이 `<arg1>` 및 `<arg2>`는 `<name>`에 대한 인수입니다.
 
-we'll get an error from GHC stating that `putStrLn` is applied to two arguments,
-but it only takes one. This is because the above is of the form `<name> <arg1> <arg2>`
-in which, as we defined earlier, `<arg1>` and `<arg2>` are arguments to `<name>`.
-
-By using parenthesis we can group together the expressions in the right order.
+괄호를 사용하여 올바른 순서로 표현식을 묶을 수 있습니다.
 
 > #### An aside about operator precedence and fixity
 >

@@ -1,22 +1,23 @@
-# learn-haskell-blog-generator
+# 블로그 생성기를 만들며 배우는 하스켈
 
-This is the source repository for
+> 🚧 현재 이 레포지토리는 번역 중에 있습니다. 많은 부분들이 번역되지 않은 상태니 조금만 기다려주시면 감사하겠습니다. (직접 번역을 하고 싶으신 분들도 얼마든지 환영입니다!)
+
+이 레포지토리는 
 "Learn Haskell by building a blog generator",
-a book about Haskell.
+의 한국어 버전입니다.
 
-To view the book, visit the [website](https://lhbg-book.link).
+책을 보고 싶다면, [여기](https://daveg7lee.github.io/learn-haskell-blog-generator-kr/)를 클릭하세요.
 
-To report issues and ask questions,
-visit the [issue tracker](https://github.com/soupi/learn-haskell-blog-generator/issues).
+궁금증이 있거나 에러를 제보하고 싶으시다면, [여기로](https://github.com/soupi/learn-haskell-blog-generator/issues)(이 레포지토리가 아니라 soupi님의 메인 레포지토리로 가게 됩니다)
 
-## Code reference
+## 코드 레퍼런스
 
 <table>
   <thead>
     <tr>
-      <th>Chapter</th>
-      <th>Code</th>
-      <th>Commit</th>
+      <th>챕터</th>
+      <th>코드</th>
+      <th>커밋</th>
     </tr>
   </thead>
   <tbody>
@@ -72,3 +73,6 @@ visit the [issue tracker](https://github.com/soupi/learn-haskell-blog-generator/
     </tr>
   </tbody>
 </table>
+
+## 기여
+현재 이 레포지토리는 번역중에 있습니다. 빠른 번역을 위해서는 많은 분들에 도움이 필요합니다. 번역에 참여하고 싶으시다면 얼마든지 PR을 날려주세요!
