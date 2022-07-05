@@ -50,22 +50,19 @@ main = putStrLn wrapHtml "Hello, world!"
 
 괄호를 사용하여 올바른 순서로 표현식을 묶을 수 있습니다.
 
-> #### An aside about operator precedence and fixity
+> #### 연산자 우선순위 및 고정성에 대하여
 >
-> operators (like `<>`) are infix functions which take two arguments - one from each side.
+> 연산자 (ex: `<>`) 는 양쪽에서 하나씩 두 개의 인수를 취하는 중위 함수입니다.
+> 
+> 괄호가 없는 동일한 표현식에서 여러 연산자가 있는 경우 *fixity* (왼쪽 혹은 오른쪽)과 *우선순위* (0부터 10사이의 숫자)에 따라 더 밀접하게 결합되는 연산자가 결정됩니다.
 >
-> When there are multiple operators in the same expression without parenthesis, the operator
-> *fixity* (left or right) and *precedence* (a number between 0 and 10) determine which
-> operator binds more tightly.
->
-> In our case `<>` has *right* fixity, so Haskell adds invisible parenthesis on the right side
-> of `<>`. So for example:
+> 우리의 경우 `<>` 는 *오른쪽* fixity를 가지고 있습니다, 따라서 하스켈은 오른쪽에 보이지 않는 괄호를 추가합니다. 예를 들어:
 >
 > ```hs
 > "<html><body>" <> content <> "</body></html>"
 > ```
 >
-> is viewed by Haskell as:
+> 하스켈의 관점에서는:
 >
 > ```hs
 > "<html><body>" <> (content <> "</body></html>")
