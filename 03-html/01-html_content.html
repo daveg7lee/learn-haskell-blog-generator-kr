@@ -176,91 +176,85 @@
 <blockquote>
 <h4 id="연산자-우선순위-및-고정성에-대하여"><a class="header" href="#연산자-우선순위-및-고정성에-대하여">연산자 우선순위 및 고정성에 대하여</a></h4>
 <p>연산자 (ex: <code>&lt;&gt;</code>) 는 양쪽에서 하나씩 두 개의 인수를 취하는 중위 함수입니다.</p>
-<p>괄호가 없는 동일한 표현식에서 여러 연산자가 있는 경우 <em>fixity</em> (왼쪽 혹은 오른쪽)과 <em>우선순위</em> (0부터 10사이의 숫자)에 따라 더 밀접하게 결합되는 연산자가 결정됩니다.</p>
-<p>우리의 경우 <code>&lt;&gt;</code> 는 <em>오른쪽</em> fixity를 가지고 있습니다, 따라서 하스켈은 오른쪽에 보이지 않는 괄호를 추가합니다. 예를 들어:</p>
+<p>괄호가 없는 동일한 표현식에서 여러 연산자가 있는 경우 <em>고정성</em> (왼쪽 혹은 오른쪽)과 <em>우선순위</em> (0부터 10사이의 숫자)에 따라 더 밀접하게 결합되는 연산자가 결정됩니다.</p>
+<p>우리의 경우 <code>&lt;&gt;</code> 는 <em>오른쪽</em> 고정성 가지고 있습니다, 따라서 하스켈은 오른쪽에 보이지 않는 괄호를 추가합니다. 예를 들어:</p>
 <pre><code class="language-hs">&quot;&lt;html&gt;&lt;body&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/body&gt;&lt;/html&gt;&quot;
 </code></pre>
 <p>하스켈의 관점에서는:</p>
 <pre><code class="language-hs">&quot;&lt;html&gt;&lt;body&gt;&quot; &lt;&gt; (content &lt;&gt; &quot;&lt;/body&gt;&lt;/html&gt;&quot;)
 </code></pre>
-<p>For an example of precedence, in the expression <code>1 + 2 * 3</code>,
-the operator <code>+</code> has precedence 6, and the operator <code>*</code> has precedence 7,
-so we give precedence to <code>*</code> over <code>+</code>. Haskell will view this expression as:</p>
+<p>우선 순위로 예를 들자면, <code>1 + 2 * 3</code> 이라는 식에서 <code>+</code> 연산자는 우선 순위 6을 <code>*</code> 연산자는 우선 순위 7을 가지므로 <code>+</code> 보다 <code>*</code>에 우선 순위를 부여합니다. 따라서 하스켈은 이 식을 다음과 같이 보게 될 것입니다.</p>
 <pre><code class="language-hs">1 + (2 * 3)
 </code></pre>
-<p>You might run into errors when mixing different operators with the <em>same precedence</em>
-but <em>different fixity</em>, because Haskell won't understand how to group these expressions.
-In that case we can solve the problem by adding parenthesis explicitly.</p>
+<p><em>우선 순위</em>는 같지만 <em>고정성</em>이 다른 연산자를 혼합해 사용할 경우 에러가 발생할 수 있습니다. 이러한 경우에는 명시적으로 괄호를 사용하여 문제를 해결할 수 있습니다</p>
 </blockquote>
 <hr />
-<p>Exercises:</p>
+<p>연습 문제:</p>
 <ol>
 <li>
-<p>Separate the functionality of <code>wrapHtml</code> to two functions:</p>
+<p><code>wrapHtml</code>의 기능을 두 가지 함수로 분리:</p>
 <ol>
-<li>One that wraps content in <code>html</code> tag</li>
-<li>one that wraps content in a <code>body</code> tag</li>
+<li>콘텐츠를 <code>html</code> 태그로 감싸는 함수</li>
+<li>콘텐츠를 <code>body</code> 태그로 감싸는 함수</li>
 </ol>
-<p>Name the new functions <code>html_</code> and <code>body_</code>.</p>
+<p>새로운 함수의 이름은 <code>html_</code>과 <code>body_</code>가 되야합니다.</p>
 </li>
 <li>
-<p>Change <code>myhtml</code> to use these two functions.</p>
+<p><code>myhtml</code>이 위의 두 함수를 사용하도록 변경하세요.</p>
 </li>
 <li>
-<p>Add another two similar functions for the tags <code>&lt;head&gt;</code> and <code>&lt;title&gt;</code>
-and name them <code>head_</code> and <code>title_</code>.</p>
+<p><code>&lt;head&gt;</code>와 <code>&lt;title&gt;</code> 태그로 비슷한 함수 2개를 만들고 <code>head_</code>와 <code>title_</code>라는 이름을 붙이세요</p>
 </li>
 <li>
-<p>Create a new function, <code>makeHtml</code>, which takes two strings as input:</p>
+<p>두 개의 문자열을 인수로 받아들이는 새로운 함수 <code>makeHtml</code>을 작성하세요:</p>
 <ol>
-<li>One string for the title</li>
-<li>One string for the body content</li>
+<li>문자열 하나는 제목이 되고</li>
+<li>다른 하나는 바디 콘텐츠가 되어야합니다.</li>
 </ol>
-<p>And construct an HTML string using the functions implemented in the previous exercises.</p>
-<p>The output for:</p>
+<p>그리고 이전 연습에서 구현한 함수를 사용하여 HTML 문자열을 구성합니다.</p>
+<p>함수의 출력은 아래와 같아야 합니다.</p>
 <pre><code class="language-hs">makeHtml &quot;My page title&quot; &quot;My page content&quot;
 </code></pre>
-<p>should be:</p>
 <pre><code class="language-html">&lt;html&gt;&lt;head&gt;&lt;title&gt;My page title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;My page content&lt;/body&gt;&lt;/html&gt;
 </code></pre>
 </li>
 <li>
-<p>Use <code>makeHtml</code> in <code>myhtml</code> instead of using <code>html_</code> and <code>body_</code> directly</p>
+<p><code>myhtml</code>에 <code>html_</code>과 <code>body_</code>을 직접 사용하는 대신 <code>makeHtml</code>을 사용하세요.</p>
 </li>
 </ol>
 <hr />
-<p>Solutions:</p>
+<p>해답:</p>
 <details>
-  <summary>Solution for exercise #1</summary>
+  <summary>연습 문제 1</summary>
 <pre><code class="language-hs">html_ content = &quot;&lt;html&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/html&gt;&quot;
    
 body_ content = &quot;&lt;body&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/body&gt;&quot;
 </code></pre>
 </details>
 <details>
-  <summary>Solution for exercise #2</summary>
+  <summary>연습 문제 2</summary>
 <pre><code class="language-hs">myhtml = html_ (body_ &quot;Hello, world!&quot;)
 </code></pre>
 </details>
 <details>
-  <summary>Solution for exercise #3</summary>
+  <summary>연습문제 3</summary>
 <pre><code class="language-hs">head_ content = &quot;&lt;head&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/head&gt;&quot;
 
 title_ content = &quot;&lt;title&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/title&gt;&quot;
 </code></pre>
 </details>
 <details>
-  <summary>Solution for exercise #4</summary>
+  <summary>연습문제 4</summary>
 <pre><code class="language-hs">makeHtml title content = html_ (head_ (title_ title) &lt;&gt; body_ content)
 </code></pre>
 </details>
 <details>
-  <summary>Solution for exercise #5</summary>
+  <summary>연습문제 5</summary>
 <pre><code class="language-hs">myhtml = makeHtml &quot;Hello title&quot; &quot;Hello, world!&quot;
 </code></pre>
 </details>
 <details>
-  <summary>Our final program</summary>
+  <summary>최종 완성본</summary>
 <pre><code class="language-hs">-- hello.hs
 
 main = putStrLn myhtml
@@ -277,38 +271,40 @@ head_ content = &quot;&lt;head&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/he
 
 title_ content = &quot;&lt;title&gt;&quot; &lt;&gt; content &lt;&gt; &quot;&lt;/title&gt;&quot;
 </code></pre>
-<p>We can now run our <code>hello.hs</code> program, pipeline the output into a file,
-and open it in our browser:</p>
+<p>이제 hello.hs 프로그램을 실행하고 출력을 파일로 옮겨 브라우저에서 열 수 있습니다.</p>
 <pre><code class="language-sh">runghc hello.hs &gt; hello.html
 firefox hello.html
 </code></pre>
-<p>It should display <code>Hello, world!</code> on the page and <code>Hello title</code> on the page's title.</p>
+<p>웹 페이지에 'Hello, world!'가 표시되고 웹 페이지 제목에 'Hello title'이 표시될 것입니다.</p>
 </details>
 <hr />
-<h2 id="indentation"><a class="header" href="#indentation">Indentation</a></h2>
-<p>You might ask how does Haskell know a definition is complete?
-The answer is: Haskell uses indentation to know when things should be grouped together.</p>
-<p>Indentation in Haskell can be a bit tricky, but in general: code which is supposed to be
-part of another expression should be indented further than the beginning of that expression.</p>
-<p>We know two definitions are separate because the second one is not indented further than the first one.</p>
-<h3 id="indentation-tips"><a class="header" href="#indentation-tips">Indentation tips</a></h3>
+<h2 id="들여쓰기"><a class="header" href="#들여쓰기">들여쓰기</a></h2>
+<p>아마 당신은 &quot;어떻게 하스켈은 정의가 끝났다는 것을 알 수 있습니까?&quot; 정답은 하스켈은 들여쓰기를 사용해서 항목들이 그룹화되는 것을 결정합니다.</p>
+<p>Haskell의 들여쓰기는 약간 까다로울 수 있지만 일반적으로 다른 표현식의 일부로 간주되는 코드는 해당 표현식의 시작 부분보다 더 들여써야 합니다.</p>
+<p>두 번째 정의가 첫 번째 정의보다 들여쓰기되지 않기 때문에 두 정의가 별개라는 것을 알 수 있습니다.</p>
+<h3 id="들여쓰기-팁"><a class="header" href="#들여쓰기-팁">들여쓰기 팁</a></h3>
 <ol>
-<li>Choose a specific amount of spaces for indentation (2 spaces, 4 spaces, etc) and stick to it.
-Always use spaces over tabs.</li>
-<li>Do not indent more than once in any given time.</li>
-<li>When in doubt, drop line as needed and indent once.</li>
+<li>
+<p>들여쓰기를 위한 특정 양의 공백 (2칸, 4칸 등)을 선택하고 변경하지 마세요.
+항상 탭보다는 스페이스를 사용하세요.</p>
+</li>
+<li>
+<p>한번에 여러번 들여쓰지 마세요.</p>
+</li>
+<li>
+<p>확실하지 않은 경우 필요에 따라 줄을 삭제하고 한 번 들여쓰기하세요.</p>
+</li>
 </ol>
-<p>Here are a few examples:</p>
+<p>여기 몇가지 예시가 있습니다:</p>
 <pre><code class="language-hs">main =
     putStrLn &quot;Hello, world!&quot;
 </code></pre>
-<p>or:</p>
+<p>또는:</p>
 <pre><code class="language-hs">main =
     putStrLn
         (wrapHtml &quot;Hello, world!&quot;)
 </code></pre>
-<p><strong>Avoid the following styles</strong>, which use more than one indentation steps, or completely disregard
-indentation steps:</p>
+<p><strong>다음의 스타일을 피하세요</strong>: 둘 이상의 들여쓰기 단계를 사용하거나, 들여쓰기 단계를 완전히 무시하는 스타일</p>
 <pre><code class="language-hs">main = putStrLn
         (wrapHtml &quot;Hello, world!&quot;)
 </code></pre>
