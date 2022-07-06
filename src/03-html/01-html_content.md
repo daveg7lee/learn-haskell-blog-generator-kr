@@ -54,9 +54,9 @@ main = putStrLn wrapHtml "Hello, world!"
 >
 > 연산자 (ex: `<>`) 는 양쪽에서 하나씩 두 개의 인수를 취하는 중위 함수입니다.
 > 
-> 괄호가 없는 동일한 표현식에서 여러 연산자가 있는 경우 *fixity* (왼쪽 혹은 오른쪽)과 *우선순위* (0부터 10사이의 숫자)에 따라 더 밀접하게 결합되는 연산자가 결정됩니다.
+> 괄호가 없는 동일한 표현식에서 여러 연산자가 있는 경우 *고정성* (왼쪽 혹은 오른쪽)과 *우선순위* (0부터 10사이의 숫자)에 따라 더 밀접하게 결합되는 연산자가 결정됩니다.
 >
-> 우리의 경우 `<>` 는 *오른쪽* fixity를 가지고 있습니다, 따라서 하스켈은 오른쪽에 보이지 않는 괄호를 추가합니다. 예를 들어:
+> 우리의 경우 `<>` 는 *오른쪽* 고정성 가지고 있습니다, 따라서 하스켈은 오른쪽에 보이지 않는 괄호를 추가합니다. 예를 들어:
 >
 > ```hs
 > "<html><body>" <> content <> "</body></html>"
@@ -68,55 +68,51 @@ main = putStrLn wrapHtml "Hello, world!"
 > "<html><body>" <> (content <> "</body></html>")
 > ```
 >
-> For an example of precedence, in the expression `1 + 2 * 3`,
-> the operator `+` has precedence 6, and the operator `*` has precedence 7,
-> so we give precedence to `*` over `+`. Haskell will view this expression as:
+> 우선 순위로 예를 들자면, `1 + 2 * 3` 이라는 식에서 `+` 연산자는 우선 순위 6을 `*` 연산자는 우선 순위 7을 가지므로 `+` 보다 `*`에 우선 순위를 부여합니다. 따라서 하스켈은 이 식을 다음과 같이 보게 될 것입니다.
 >
 > ```hs
 > 1 + (2 * 3)
 > ```
->
-> You might run into errors when mixing different operators with the *same precedence*
-> but *different fixity*, because Haskell won't understand how to group these expressions.
-> In that case we can solve the problem by adding parenthesis explicitly.
+> *우선 순위*는 같지만 *고정성*이 다른 연산자를 혼합해 사용할 경우 에러가 발생할 수 있습니다. 이러한 경우에는 명시적으로 괄호를 사용하여 문제를 해결할 수 있습니다
 
 ---
 
-Exercises:
+연습 문제:
 
-1. Separate the functionality of `wrapHtml` to two functions:
-   1. One that wraps content in `html` tag
-   2. one that wraps content in a `body` tag
+1. `wrapHtml`의 기능을 두 가지 함수로 분리:
+   1. 콘텐츠를 `html` 태그로 감싸는 함수
+   2. 콘텐츠를 `body` 태그로 감싸는 함수
+   
+   새로운 함수의 이름은 `html_`과 `body_`가 되야합니다.
 
-   Name the new functions `html_` and `body_`.
-2. Change `myhtml` to use these two functions.
-3. Add another two similar functions for the tags `<head>` and `<title>`
-   and name them `head_` and `title_`.
-4. Create a new function, `makeHtml`, which takes two strings as input:
-   1. One string for the title
-   2. One string for the body content
-   
-   And construct an HTML string using the functions implemented in the previous exercises.
-   
-   The output for:
-   
+2. `myhtml`이 위의 두 함수를 사용하도록 변경하세요.
+
+3. `<head>`와 `<title>` 태그로 비슷한 함수 2개를 만들고 `head_`와 `title_`라는 이름을 붙이세요
+
+4. 두 개의 문자열을 인수로 받아들이는 새로운 함수 `makeHtml`을 작성하세요:
+   1. 문자열 하나는 제목이 되고
+   2. 다른 하나는 바디 콘텐츠가 되어야합니다.
+
+   그리고 이전 연습에서 구현한 함수를 사용하여 HTML 문자열을 구성합니다.
+
+   함수의 출력은 아래와 같아야 합니다.
+
    ```hs
    makeHtml "My page title" "My page content"
    ```
    
-   should be:
-   
    ```html
    <html><head><title>My page title</title></head><body>My page content</body></html>
    ```
-5. Use `makeHtml` in `myhtml` instead of using `html_` and `body_` directly
+
+5. `myhtml`에 `html_`과 `body_`을 직접 사용하는 대신 `makeHtml`을 사용하세요.
 
 ---
 
-Solutions:
+해답:
 
 <details>
-  <summary>Solution for exercise #1</summary>
+  <summary>연습 문제 1</summary>
   
   ```hs
   html_ content = "<html>" <> content <> "</html>"
@@ -127,7 +123,7 @@ Solutions:
 </details>
 
 <details>
-  <summary>Solution for exercise #2</summary>
+  <summary>연습 문제 2</summary>
   
   ```hs
   myhtml = html_ (body_ "Hello, world!")
@@ -136,7 +132,7 @@ Solutions:
 </details>
 
 <details>
-  <summary>Solution for exercise #3</summary>
+  <summary>연습문제 3</summary>
   
   ```hs
   head_ content = "<head>" <> content <> "</head>"
@@ -147,7 +143,7 @@ Solutions:
 </details>
 
 <details>
-  <summary>Solution for exercise #4</summary>
+  <summary>연습문제 4</summary>
   
   ```hs
   makeHtml title content = html_ (head_ (title_ title) <> body_ content)
@@ -157,7 +153,7 @@ Solutions:
 
 
 <details>
-  <summary>Solution for exercise #5</summary>
+  <summary>연습문제 5</summary>
   
   ```hs
   myhtml = makeHtml "Hello title" "Hello, world!"
@@ -167,7 +163,7 @@ Solutions:
 
 
 <details>
-  <summary>Our final program</summary>
+  <summary>최종 완성본</summary>
   
   ```hs
   -- hello.hs
@@ -186,48 +182,45 @@ Solutions:
   
   title_ content = "<title>" <> content <> "</title>"
   ```
-
-   We can now run our `hello.hs` program, pipeline the output into a file,
-   and open it in our browser:
+   이제 hello.hs 프로그램을 실행하고 출력을 파일로 옮겨 브라우저에서 열 수 있습니다.
    
    ```sh
    runghc hello.hs > hello.html
    firefox hello.html
    ```
 
-It should display `Hello, world!` on the page and `Hello title` on the page's title.
+웹 페이지에 'Hello, world!'가 표시되고 웹 페이지 제목에 'Hello title'이 표시될 것입니다.
 
 </details>
 
 
 ---
 
-## Indentation
+## 들여쓰기
 
-You might ask how does Haskell know a definition is complete?
-The answer is: Haskell uses indentation to know when things should be grouped together.
+아마 당신은 "어떻게 하스켈은 정의가 끝났다는 것을 알 수 있습니까?" 정답은 하스켈은 들여쓰기를 사용해서 항목들이 그룹화되는 것을 결정합니다.
 
-Indentation in Haskell can be a bit tricky, but in general: code which is supposed to be
-part of another expression should be indented further than the beginning of that expression.
+Haskell의 들여쓰기는 약간 까다로울 수 있지만 일반적으로 다른 표현식의 일부로 간주되는 코드는 해당 표현식의 시작 부분보다 더 들여써야 합니다.
 
-We know two definitions are separate because the second one is not indented further than the first one.
+두 번째 정의가 첫 번째 정의보다 들여쓰기되지 않기 때문에 두 정의가 별개라는 것을 알 수 있습니다.
 
 
-### Indentation tips
+### 들여쓰기 팁
 
-1. Choose a specific amount of spaces for indentation (2 spaces, 4 spaces, etc) and stick to it.
-   Always use spaces over tabs.
-2. Do not indent more than once in any given time.
-3. When in doubt, drop line as needed and indent once.
+1. 들여쓰기를 위한 특정 양의 공백 (2칸, 4칸 등)을 선택하고 변경하지 마세요.
+   항상 탭보다는 스페이스를 사용하세요.
 
-Here are a few examples:
+2. 한번에 여러번 들여쓰지 마세요.
+3. 확실하지 않은 경우 필요에 따라 줄을 삭제하고 한 번 들여쓰기하세요.
+
+여기 몇가지 예시가 있습니다:
 
 ```hs
 main =
     putStrLn "Hello, world!"
 ```
 
-or:
+또는:
 
 ```hs
 main =
@@ -235,8 +228,7 @@ main =
         (wrapHtml "Hello, world!")
 ```
 
-__Avoid the following styles__, which use more than one indentation steps, or completely disregard
-indentation steps:
+__다음의 스타일을 피하세요__: 둘 이상의 들여쓰기 단계를 사용하거나, 들여쓰기 단계를 완전히 무시하는 스타일
 
 ```hs
 main = putStrLn
